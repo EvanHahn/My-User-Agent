@@ -1,4 +1,6 @@
 require("http").createServer(function(req, res) {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end(req.headers["user-agent"] || "No user-agent given.");
+  var ua = req.headers["user-agent"];
+  var code = ua ? 200 : 400;
+  res.writeHead(code, { "Content-Type": "text/plain" });
+  res.end(ua || "No user-agent given.");
 }).listen(process.env.PORT || 8000);
